@@ -36,9 +36,9 @@ enum class ImageScalingType
     STRETCH,
     // The image is either cropped (not enough space) or untouched (too much space)
     CENTER,
-    // The image is cropped on the left side if the view boundaries are smaller than the image dimensions. If there's too much space, the image remains untouched.
+    // The image is cropped on the left side
     CROP_LEFT,
-    // The image is cropped on the right side if the view boundaries are smaller than the image dimensions. If there's too much space, the image remains untouched.
+    // The image is cropped on the right side
     CROP_RIGHT
 };
 
