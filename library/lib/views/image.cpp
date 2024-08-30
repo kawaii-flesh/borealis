@@ -266,6 +266,18 @@ void Image::invalidateImageBounds()
             this->imageX      = (width - this->imageWidth) / 2.0F;
             this->imageY      = (height - this->imageHeight) / 2.0F;
             break;
+        case ImageScalingType::CROP_LEFT:
+            this->imageHeight = this->getHeight();
+            this->imageWidth  = this->imageHeight / imageAspectRatio;
+            this->imageX      = this->getWidth() - this->imageWidth;
+            this->imageY      = 0;
+            break;
+        case ImageScalingType::CROP_RIGHT:
+            this->imageHeight = this->getHeight();
+            this->imageWidth  = this->imageHeight / imageAspectRatio;
+            this->imageX      = 0;
+            this->imageY      = 0;
+            break;
         default:
             fatal("Unimplemented Image scaling type");
     }
