@@ -89,7 +89,7 @@ bool SwitchImeManager::openForText(std::function<void(std::string)> f, std::stri
 {
     SwkbdConfig config = createSwkbdBaseConfig(headerText, subText, maxStringLength, initialText);
 
-    swkbdConfigSetType(&config, SwkbdType_All);
+    swkbdConfigSetType(&config, SwkbdType_Normal);
     swkbdConfigSetKeySetDisableBitmask(&config, getSwkbdKeyDisableBitmask(kbdDisableBitmask));
 
     char buffer[0x100];
