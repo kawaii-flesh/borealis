@@ -34,6 +34,7 @@
 #include <fmt/chrono.h>
 
 #include <borealis/core/event.hpp>
+#include <mutex>
 #include <string>
 
 namespace brls
@@ -82,6 +83,7 @@ class Logger
     template <typename... Args>
     inline static void log(LogLevel level, std::string prefix, std::string color, fmt::format_string<Args...> format, Args&&... args)
     {
+        std::lock_guard<std::mutex> guard(logMutex);
         if (Logger::logLevel < level)
             return;
 
@@ -119,9 +121,7 @@ class Logger
             printf("! Invalid log format string: \"%s\": %s\n", fmt::basic_string_view<char>(format).data(), e.what());
         }
 
-#ifdef __MINGW32__
         fflush(logOut);
-#endif
     }
 
     template <typename... Args>
@@ -163,6 +163,7 @@ class Logger
     inline static std::FILE *logOut = stdout;
     inline static LogLevel logLevel = LogLevel::LOG_INFO;
     inline static Event<TimePoint, LogLevel, std::string> logEvent;
+    inline static std::mutex logMutex;
 };
 
 } // namespace brls
