@@ -393,6 +393,10 @@ class View
 
     void shakeHighlight(FocusDirection direction);
 
+    virtual NVGcolor getHighlightBorderColor() const {
+        return this->borderColor;
+    }
+
     Rect getFrame();
     float getX();
     float getY();

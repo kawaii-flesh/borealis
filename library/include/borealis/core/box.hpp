@@ -293,6 +293,8 @@ class Box : public View
      * to the children of the Box.
      */
     void handleXMLElement(tinyxml2::XMLElement* element) override;
+
+    NVGcolor getHighlightBorderColor() const override;
 };
 
 // An empty view that has auto x auto and grow=1.0 to push

@@ -737,6 +737,20 @@ void Padding::draw(NVGcontext* vg, float x, float y, float width, float height, 
 {
 }
 
+NVGcolor Box::getHighlightBorderColor() const
+{
+    NVGcolor own = View::getHighlightBorderColor();
+    if (own.a > 0.0f) return own;
+
+    for (View* child : this->children)
+    {
+        if (!child) continue;
+        NVGcolor c = child->getHighlightBorderColor();
+        if (c.a > 0.0f) return c;
+    }
+    return TRANSPARENT;
+}
+
 View* Padding::create()
 {
     return new Padding();

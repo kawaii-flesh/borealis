@@ -565,7 +565,10 @@ void View::drawHighlight(NVGcontext* vg, Theme theme, float alpha, Style style, 
         float gradientX, gradientY, color;
         getHighlightAnimation(&gradientX, &gradientY, &color);
 
-        NVGcolor highlightColor1 = theme["brls/highlight/color1"];
+        NVGcolor highlightColor1 = this->getHighlightBorderColor();
+        if (highlightColor1.a == 0.0f) {
+            highlightColor1 = theme["brls/highlight/color1"];
+        }
 
         NVGcolor pulsationColor = RGBAf((color * highlightColor1.r) + (1 - color) * highlightColor1.r,
             (color * highlightColor1.g) + (1 - color) * highlightColor1.g,
